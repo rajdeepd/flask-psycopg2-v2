@@ -2,8 +2,6 @@ import os
 import psycopg2
 from flask import Flask, render_template
 import urlparse
-from os.path import exists
-from os import makedirs
 import logging
 from logging.handlers import RotatingFileHandler
 from flask import request
@@ -40,7 +38,7 @@ def contacts():
 
         return render_template('template.html',  results=my_list)
     except Exception as e:
-        print e
+        print(e)
         return []
 
 @app.route('/create_contact', methods=['POST','GET'])
@@ -48,21 +46,20 @@ def create_contact():
 
     try:
         if request.method == "POST":
-		firstname = request.form["first-name"]
-                lastname = request.form["last-name"]
-                email = request.form["email"]
-		
-		app.logger.info(firstname)
-		statement = "insert into salesforce.contact(firstname, lastname, email) values ('" \
-		    + firstname + "','" + lastname +  "','" + email + "');"
-		cur.execute(statement)
-		conn.commit()
-		errors = []
-		results = {'A':'1','B':'2'}
-		return render_template('result.html', errors=errors, firstname=firstname, 
-			lastname= lastname)
+            first_name = request.form["first-name"]
+            last_name = request.form["last-name"]
+            email = request.form["email"]
+
+            app.logger.info(first_name)
+            statement = "insert into salesforce.contact(firstname, lastname, email) values ('" \
+                + first_name + "','" + last_name + "','" + email + "');"
+            cur.execute(statement)
+            conn.commit()
+            errors = []
+            return render_template('result.html', errors=errors, firstname=first_name,
+                                   lastname=last_name)
     except Exception as e:
-        print e
+        print(e)
         return []
 
     
@@ -72,4 +69,4 @@ if __name__ == '__main__':
     app.logger.addHandler(handler)
     app.run()
 
-	
+
