@@ -16,11 +16,9 @@ cur = conn.cursor()
 app = Flask(__name__)
 
 @app.route('/')
-def hello():
-    app.logger.warning('A warning occurred (%d apples)', 42)
-    app.logger.error('An error occurred')
-    app.logger.info('Info')
-    return 'Hello World!'
+def home():
+    #return 'Hello World!'
+    return render_template('home.html')
 
 @app.route('/contactform')
 def contactform():
@@ -36,7 +34,7 @@ def contacts():
         for row in rows:
             my_list.append(row[0])
 
-        return render_template('template.html',  results=my_list)
+        return render_template('contact_list.html',  results=my_list)
     except Exception as e:
         print(e)
         return []

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %} Heroku Connect with Flask{% endblock %}
+{% block content %}
+      <h2>Contacts</h2>
+      <ul>
+        {% for r in results %}
+        <li>{{r}}</li>
+        {% endfor %}
+      </ul>
+{% endblock %}
+
