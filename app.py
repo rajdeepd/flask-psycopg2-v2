@@ -27,7 +27,7 @@ def contactform():
 @app.route('/contacts')
 def contacts():
     try:
-        cur.execute("""SELECT name from salesforce.contact""")
+        cur.execute("""SELECT firstname from salesforce.contact""")
         rows = cur.fetchall()
         response = ''
         my_list = []
