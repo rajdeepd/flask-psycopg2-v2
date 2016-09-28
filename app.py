@@ -27,12 +27,12 @@ def contactform():
 @app.route('/contacts')
 def contacts():
     try:
-        cur.execute("""SELECT firstname from salesforce.contact""")
+        cur.execute("""SELECT firstname, lastname, email from salesforce.contact""")
         rows = cur.fetchall()
         response = ''
         my_list = []
         for row in rows:
-            my_list.append(row[0])
+            my_list.append(row)
 
         return render_template('contact_list.html',  results=my_list)
     except Exception as e:
